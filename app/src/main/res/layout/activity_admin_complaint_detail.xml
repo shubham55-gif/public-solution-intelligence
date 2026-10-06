@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- ═══ HEADER BAR ═══ -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/gradient_admin_header"
+            android:orientation="vertical"
+            android:padding="20dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp">
+
+            <TextView
+                android:id="@+id/tvIssue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Issue Type"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                android:orientation="horizontal" android:gravity="center_vertical"
+                android:layout_marginTop="8dp">
+
+                <TextView
+                    android:id="@+id/tvStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pending"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#F9A825"
+                    android:background="@drawable/bg_status_chip_header"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp" />
+
+                <TextView
+                    android:id="@+id/tvRisk"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="🔴 High Risk"
+                    android:textSize="12sp"
+                    android:textColor="#FFCDD2"
+                    android:layout_marginStart="8dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ═══ INFO CARD ═══ -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:layout_marginTop="-16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <!-- Citizen and Admin accountability row -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="👤 " android:textSize="16sp" />
+                    <TextView android:id="@+id/tvCitizen" android:layout_width="0dp"
+                        android:layout_height="wrap_content" android:layout_weight="1"
+                        android:text="Citizen" android:textSize="14sp"
+                        android:textColor="@color/textPrimary" android:textStyle="bold" />
+                    <TextView android:id="@+id/tvRepeat"
+                        android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="⚠ REPEATED"
+                        android:textSize="11sp" android:textColor="#6A1B9A"
+                        android:background="@drawable/bg_repeat_badge"
+                        android:paddingLeft="8dp" android:paddingRight="8dp"
+                        android:paddingTop="3dp" android:paddingBottom="3dp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="1dp"
+                    android:background="@color/divider" android:layout_marginBottom="12dp" />
+
+                <!-- Location + timestamp -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal" android:layout_marginBottom="8dp">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="COORDINATES" android:textSize="10sp"
+                            android:textColor="@color/textHint" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvWard" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="—"
+                            android:textSize="12sp" android:textColor="@color/textPrimary" />
+                    </LinearLayout>
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="REPORTED" android:textSize="10sp"
+                            android:textColor="@color/textHint" android:textStyle="bold" />
+                        <TextView android:id="@+id/tvCreated" android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" android:text="—"
+                            android:textSize="12sp" android:textColor="@color/textPrimary" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Admin assignment row -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="vertical" android:layout_marginBottom="8dp">
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                        android:text="ASSIGNED TO" android:textSize="10sp"
+                        android:textColor="@color/textHint" android:textStyle="bold" />
+                    <TextView android:id="@+id/tvAssignedAdmin" android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:text="Unassigned"
+                        android:textSize="12sp" android:textColor="@color/textPrimary" />
+                </LinearLayout>
+
+                <!-- Description -->
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="DESCRIPTION" android:textSize="10sp"
+                    android:textColor="@color/textHint" android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+                <TextView
+                    android:id="@+id/tvDesc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="No description"
+                    android:textSize="14sp"
+                    android:textColor="@color/textSecondary"
+                    android:lineSpacingExtra="3dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- Action buttons -->
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnUpdateStatus"
+                        android:layout_width="0dp" android:layout_height="46dp"
+                        android:layout_weight="1" android:text="Update Status"
+                        android:textSize="13sp"
+                        app:backgroundTint="@color/adminPrimary" app:cornerRadius="10dp"
+                        android:layout_marginEnd="8dp" />
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnMap"
+                        android:layout_width="0dp" android:layout_height="46dp"
+                        android:layout_weight="1" android:text="View on Map"
+                        android:textSize="13sp"
+                        app:backgroundTint="@color/citizenPrimary" app:cornerRadius="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ═══ AI / VLM INTELLIGENCE PANEL ═══ -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🧠 AI/VLM Evidence"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@color/textPrimary"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="8dp" />
+
+        <!-- Loading spinner -->
+        <ProgressBar
+            android:id="@+id/pbAiLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="12dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="#F3E5F5">
+
+            <LinearLayout
+                android:id="@+id/llAiPanel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:visibility="visible">
+
+                <TextView android:id="@+id/tvAiSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fetching AI analysis…"
+                    android:textSize="13sp"
+                    android:textColor="#4A148C"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="8dp" />
+
+                <TextView android:id="@+id/tvAiKeywords"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#6A1B9A"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView android:id="@+id/tvAiUrgency"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#BF360C"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView android:id="@+id/tvAiHazard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#BF360C"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView android:id="@+id/tvAiConfidence"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#1B5E20"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView android:id="@+id/tvAiImageResult"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="#0D47A1"
+                    android:layout_marginBottom="4dp" />
+
+                <TextView android:id="@+id/tvAiExplanation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="11sp"
+                    android:textColor="#37474F"
+                    android:fontFamily="monospace"
+                    android:lineSpacingExtra="4dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- Re-fetch AI button -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFetchAI"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            android:text="🔄 Re-run AI Analysis"
+            android:textSize="13sp"
+            app:strokeColor="#6A1B9A"
+            android:textColor="#6A1B9A"
+            app:cornerRadius="10dp" />
+
+        <!-- ═══ BEFORE / AFTER PHOTOS & RESOLUTION ═══ -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="📸 Evidence Photos"
+                    android:textSize="15sp" android:textStyle="bold"
+                    android:textColor="@color/textPrimary" android:layout_marginBottom="12dp" />
+
+                <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Before -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical"
+                        android:layout_marginEnd="8dp">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="BEFORE (Citizen)" android:textSize="11sp" android:textStyle="bold"
+                            android:textColor="@color/textHint" android:layout_marginBottom="4dp" />
+                        <ImageView android:id="@+id/ivBefore"
+                            android:layout_width="match_parent" android:layout_height="140dp"
+                            android:background="@drawable/bg_image_placeholder"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="Before image" />
+                    </LinearLayout>
+
+                    <!-- After -->
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
+                        android:layout_weight="1" android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                            android:text="AFTER (Resolution)" android:textSize="11sp" android:textStyle="bold"
+                            android:textColor="@color/textHint" android:layout_marginBottom="4dp" />
+                        <ImageView android:id="@+id/ivAfter"
+                            android:layout_width="match_parent" android:layout_height="140dp"
+                            android:background="@drawable/bg_image_placeholder"
+                            android:scaleType="centerCrop"
+                            android:contentDescription="After image" />
+                        <TextView
+                            android:id="@+id/tvAfterUnavailable"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="After-resolution image not available"
+                            android:textSize="10sp"
+                            android:textColor="@color/textSecondary"
+                            android:gravity="center"
+                            android:layout_marginTop="4dp"
+                            android:visibility="gone" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <!-- Read-only Resolved Summary Section (shown when RESOLVED) -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardResolvedSummary"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="#E8F5E9"
+                    android:visibility="gone">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="14dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="✅ RESOLVED"
+                            android:textSize="15sp"
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:id="@+id/tvResolvedBy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resolved By: —"
+                            android:textSize="13sp"
+                            android:textColor="#1B5E20"
+                            android:layout_marginBottom="4dp" />
+
+                        <TextView
+                            android:id="@+id/tvResolvedAt"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resolved At: —"
+                            android:textSize="12sp"
+                            android:textColor="#388E3C"
+                            android:layout_marginBottom="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Resolution Note:"
+                            android:textSize="11sp"
+                            android:textStyle="bold"
+                            android:textColor="#2E7D32"
+                            android:layout_marginBottom="2dp" />
+
+                        <TextView
+                            android:id="@+id/tvResolutionNoteText"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="No resolution note provided."
+                            android:textSize="13sp"
+                            android:textColor="#1B5E20"
+                            android:lineSpacingExtra="2dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Active Resolution Controls (shown when NOT resolved) -->
+                <LinearLayout
+                    android:id="@+id/llResolutionControls"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="12dp">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnUploadAfter"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:layout_width="match_parent"
+                        android:layout_height="44dp"
+                        android:text="📷 Upload After-Resolution Photo"
+                        android:textSize="13sp"
+                        app:strokeColor="@color/adminPrimary"
+                        android:textColor="@color/adminPrimary"
+                        app:cornerRadius="10dp" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilResolutionNote"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Resolution Note"
+                        android:layout_marginTop="12dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etResolutionNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minLines="2"
+                            android:inputType="textMultiLine"
+                            android:gravity="top|start" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnResolveReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="12dp"
+                        android:text="✅ Resolve Report"
+                        android:textSize="14sp"
+                        app:backgroundTint="#43A047"
+                        app:cornerRadius="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- ═══ TIMELINE ═══ -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                    android:text="📅 Case Timeline"
+                    android:textSize="15sp" android:textStyle="bold"
+                    android:textColor="@color/textPrimary" android:layout_marginBottom="12dp" />
+
+                <TextView
+                    android:id="@+id/tvTimeline"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Loading timeline…"
+                    android:textSize="13sp"
+                    android:textColor="@color/textSecondary"
+                    android:lineSpacingExtra="6dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <View android:layout_width="match_parent" android:layout_height="24dp" />
+
+    </LinearLayout>
+</ScrollView>
+

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- ═══════════════════════════════════════════
+         PRIMARY BRAND COLORS
+    ═══════════════════════════════════════════ -->
+    <color name="primaryBlue">#1565C0</color>
+    <color name="primaryBlueDark">#0D47A1</color>
+    <color name="primaryBlueLight">#1976D2</color>
+    <color name="primaryBlueSurface">#E3F2FD</color>
+    <color name="accentTeal">#00ACC1</color>
+    <color name="accentTealDark">#00838F</color>
+
+    <!-- ═══════════════════════════════════════════
+         ADMIN THEME
+    ═══════════════════════════════════════════ -->
+    <color name="adminPrimary">#1A237E</color>
+    <color name="adminPrimaryDark">#0D1B6B</color>
+    <color name="adminAccent">#3949AB</color>
+    <color name="adminSurface">#E8EAF6</color>
+
+    <!-- ═══════════════════════════════════════════
+         CITIZEN THEME
+    ═══════════════════════════════════════════ -->
+    <color name="citizenPrimary">#00695C</color>
+    <color name="citizenPrimaryDark">#004D40</color>
+    <color name="citizenAccent">#26A69A</color>
+    <color name="citizenSurface">#E0F2F1</color>
+
+    <!-- ═══════════════════════════════════════════
+         STATUS COLORS
+    ═══════════════════════════════════════════ -->
+    <color name="statusPending">#F57F17</color>
+    <color name="statusPendingLight">#FFF9C4</color>
+    <color name="statusPendingDark">#E65100</color>
+    <color name="statusInProgress">#1565C0</color>
+    <color name="statusInProgressLight">#BBDEFB</color>
+    <color name="statusResolved">#2E7D32</color>
+    <color name="statusResolvedLight">#C8E6C9</color>
+
+    <!-- ═══════════════════════════════════════════
+         RISK COLORS
+    ═══════════════════════════════════════════ -->
+    <color name="riskLow">#388E3C</color>
+    <color name="riskLowBg">#E8F5E9</color>
+    <color name="riskMedium">#F57C00</color>
+    <color name="riskMediumBg">#FFF3E0</color>
+    <color name="riskHigh">#C62828</color>
+    <color name="riskHighBg">#FFEBEE</color>
+
+    <!-- ═══════════════════════════════════════════
+         ISSUE TYPE COLORS
+    ═══════════════════════════════════════════ -->
+    <color name="issueRoad">#5D4037</color>
+    <color name="issueGarbage">#558B2F</color>
+    <color name="issueWater">#0277BD</color>
+    <color name="issueLight">#F9A825</color>
+
+    <!-- ═══════════════════════════════════════════
+         NEUTRAL / SURFACE
+    ═══════════════════════════════════════════ -->
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="background">#F5F7FA</color>
+    <color name="surface">#FFFFFF</color>
+    <color name="surfaceVariant">#F0F4F8</color>
+    <color name="divider">#E0E6ED</color>
+    <color name="cardShadow">#1A000000</color>
+
+    <!-- ═══════════════════════════════════════════
+         TEXT COLORS
+    ═══════════════════════════════════════════ -->
+    <color name="textPrimary">#1A1A2E</color>
+    <color name="textSecondary">#546E7A</color>
+    <color name="textHint">#9E9E9E</color>
+    <color name="textOnPrimary">#FFFFFF</color>
+    <color name="textLink">#1565C0</color>
+
+    <!-- ═══════════════════════════════════════════
+         ANALYTICS CARD COLORS
+    ═══════════════════════════════════════════ -->
+    <color name="cardTotal">#1565C0</color>
+    <color name="cardPending">#E65100</color>
+    <color name="cardProgress">#1565C0</color>
+    <color name="cardResolved">#2E7D32</color>
+    <color name="cardRepeat">#6A1B9A</color>
+    <color name="cardTime">#00695C</color>
+
+    <!-- NOTE: colorPrimary, colorPrimaryDark, colorAccent are defined in the
+         project's existing colors.xml — they are NOT repeated here.
+         Only app-specific new colors are defined below.               -->
+
+</resources>

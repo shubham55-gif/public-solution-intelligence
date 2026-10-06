@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.smartcivicapp">
+
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <queries>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+    </queries>
+
+    <application
+        android:name=".SmartCivicApp"
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.SmartCivicApp"
+        tools:targetApi="31">
+
+        <!-- Google Maps API Key -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/Theme.SmartCivicApp.Splash"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".RoleSelectionActivity" />
+        <activity android:name=".AdminLoginActivity" android:theme="@style/Theme.SmartCivicApp.Admin" />
+        <activity android:name=".CitizenLoginActivity" android:theme="@style/Theme.SmartCivicApp.Citizen" />
+        <activity android:name=".CitizenRegisterActivity" android:theme="@style/Theme.SmartCivicApp.Citizen" />
+        <activity android:name=".AdminHomeActivity" android:theme="@style/Theme.SmartCivicApp.Admin" />
+        <activity android:name=".CitizenHomeActivity" android:theme="@style/Theme.SmartCivicApp.Citizen" />
+        <activity android:name=".ReportIssueActivity" android:theme="@style/Theme.SmartCivicApp.Citizen" />
+        <activity android:name=".ComplaintListActivity" />
+        <activity android:name=".AdminComplaintDetailActivity" android:theme="@style/Theme.SmartCivicApp.Admin" />
+        <activity android:name=".AdminDashboardActivity" android:theme="@style/Theme.SmartCivicApp.Admin" />
+        <activity android:name=".AnalysisActivity" android:theme="@style/Theme.SmartCivicApp.Admin" />
+        <activity android:name=".RiskZonesActivity" android:theme="@style/Theme.SmartCivicApp.Admin" />
+        <activity android:name=".MapsActivity" />
+        <activity android:name=".CitizenComplaintDetailActivity" android:theme="@style/Theme.SmartCivicApp.Citizen" />
+
+    </application>
+
+</manifest>

@@ -1,0 +1,40 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.SmartCivicApp" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.SmartCivicApp" parent="Base.Theme.SmartCivicApp" />
+    <style name="Theme.SmartCivicApp.Splash" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/primaryBlue</item>
+        <item name="colorPrimaryDark">@color/primaryBlueDark</item>
+        <item name="colorPrimaryVariant">@color/primaryBlueDark</item>
+        <item name="colorSecondary">@color/accentTeal</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:colorBackground">@color/primaryBlueDark</item>
+        <item name="android:statusBarColor">@color/primaryBlueDark</item>
+        <item name="android:windowFullscreen">false</item>
+        <item name="android:windowActivityTransitions">true</item>
+    </style>
+
+    <style name="Theme.SmartCivicApp.Admin" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/adminPrimary</item>
+        <item name="colorPrimaryDark">@color/adminPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/adminPrimaryDark</item>
+        <item name="colorSecondary">@color/adminAccent</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/adminPrimaryDark</item>
+    </style>
+
+    <style name="Theme.SmartCivicApp.Citizen" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/citizenPrimary</item>
+        <item name="colorPrimaryDark">@color/citizenPrimaryDark</item>
+        <item name="colorPrimaryVariant">@color/citizenPrimaryDark</item>
+        <item name="colorSecondary">@color/citizenAccent</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:colorBackground">@color/background</item>
+        <item name="android:statusBarColor">@color/citizenPrimaryDark</item>
+    </style>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">SmartCivicApp</string>
+    <string name="title_activity_maps">Map View</string>
+    <string-array name="issue_categories">
+        <item>Select issue type</item>
+        <item>Road Damage</item>
+        <item>Garbage Overflow</item>
+        <item>Water Leakage</item>
+        <item>Street Light Issue</item>
+    </string-array>
+</resources>

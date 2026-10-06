@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- Filter bar (hidden in single-complaint mode via Java) -->
+    <LinearLayout
+        android:id="@+id/layoutMapFilters"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/adminPrimary"
+        android:padding="10dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinnerMapStatus"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_spinner_white"
+            android:paddingLeft="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Spinner
+            android:id="@+id/spinnerMapType"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_spinner_white"
+            android:paddingLeft="8dp" />
+    </LinearLayout>
+
+    <!-- Map legend -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical">
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🔴 Pending" android:textSize="11sp" android:textColor="@color/textSecondary"
+            android:layout_marginEnd="10dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🟡 In Progress" android:textSize="11sp" android:textColor="@color/textSecondary"
+            android:layout_marginEnd="10dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🟢 Resolved" android:textSize="11sp" android:textColor="@color/textSecondary"
+            android:layout_marginEnd="10dp" />
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="🟠 High Risk" android:textSize="11sp" android:textColor="@color/textSecondary" />
+    </LinearLayout>
+
+    <!-- Full screen map -->
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+</LinearLayout>
