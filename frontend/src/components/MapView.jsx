@@ -1,44 +1,46 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CircleMarker, MapContainer, Popup, TileLayer, useMap } from "react-leaflet";
 
 const DEFAULT_INDIA_CENTER = [20.5937, 78.9629];
 
-function MapInvalidator() {
+function MapViewport({ points, pointsKey }) {
   const map = useMap();
+  const [containerVisible, setContainerVisible] = useState(false);
+  const hasInitialFit = useRef(false);
+  const pointsRef = useRef(points);
+  pointsRef.current = points;
+
   useEffect(() => {
-    map.invalidateSize();
-    const timer = setTimeout(() => {
-      map.invalidateSize();
-    }, 250);
-    return () => clearTimeout(timer);
+    const container = map.getContainer();
+    const invalidateWhenVisible = () => {
+      const { width, height } = container.getBoundingClientRect();
+      if (width > 0 && height > 0) {
+        map.invalidateSize({ pan: false });
+        setContainerVisible(true);
+      }
+    };
+
+    invalidateWhenVisible();
+    const observer =
+      typeof ResizeObserver === "undefined" ? null : new ResizeObserver(invalidateWhenVisible);
+    observer?.observe(container);
+    window.addEventListener("resize", invalidateWhenVisible);
+
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", invalidateWhenVisible);
+    };
   }, [map]);
-  return null;
-}
-
-function FitToData({ reports = [], hotspots = [] }) {
-  const map = useMap();
 
   useEffect(() => {
-    const points = [
-      ...reports.map((r) => [Number(r.latitude), Number(r.longitude)]),
-      ...hotspots.map((h) => [Number(h.latitude), Number(h.longitude)]),
-    ].filter(
-      ([lat, lng]) =>
-        !isNaN(lat) &&
-        !isNaN(lng) &&
-        lat >= -90 &&
-        lat <= 90 &&
-        lng >= -180 &&
-        lng <= 180 &&
-        !(lat === 0 && lng === 0),
-    );
-
-    if (points.length > 0) {
-      map.fitBounds(points, { padding: [40, 40], maxZoom: 13 });
-    } else {
-      map.setView(DEFAULT_INDIA_CENTER, 4);
+    const currentPoints = pointsRef.current;
+    if (!containerVisible || hasInitialFit.current || currentPoints.length === 0) {
+      return;
     }
-  }, [hotspots, map, reports]);
+
+    map.fitBounds(currentPoints, { padding: [40, 40], maxZoom: 13 });
+    hasInitialFit.current = true;
+  }, [containerVisible, map, pointsKey]);
 
   return null;
 }
@@ -93,6 +95,12 @@ export default function MapView({
     return !isNaN(lat) && !isNaN(lng) && lat >= -90 && lat <= 90 && lng >= -180 && lng <= 180 && !(lat === 0 && lng === 0);
   });
 
+  const points = [
+    ...validReports.map((report) => [Number(report.latitude), Number(report.longitude)]),
+    ...validHotspots.map((hotspot) => [Number(hotspot.latitude), Number(hotspot.longitude)]),
+  ];
+  const pointsKey = points.map(([latitude, longitude]) => `${latitude},${longitude}`).join("|");
+
   return (
     <div className="map-container">
       {/* Map layer toggle bar */}
@@ -128,15 +136,13 @@ export default function MapView({
         center={DEFAULT_INDIA_CENTER}
         zoom={4}
         scrollWheelZoom
-        style={{ height: "100%", width: "100%", minHeight: "540px" }}
+        style={{ height: "100%", width: "100%" }}
       >
-        <MapInvalidator />
+        <MapViewport points={points} pointsKey={pointsKey} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <FitToData reports={validReports} hotspots={validHotspots} />
-
         {/* Report Markers */}
         {showReports &&
           validReports.map((report) => {

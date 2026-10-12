@@ -1,5 +1,6 @@
 package com.example.smartcivicapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +20,7 @@ import com.example.smartcivicapp.entities.Complaint;
 import com.example.smartcivicapp.network.models.RemoteReportMapper;
 import com.example.smartcivicapp.network.models.RemoteReportResponse;
 import com.example.smartcivicapp.repositories.ReportRepository;
+import com.example.smartcivicapp.utils.LocaleHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +55,16 @@ public class ComplaintListActivity extends AppCompatActivity {
     private String currentType   = "All";
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        PrefManager prefManager = new PrefManager(newBase);
+        if (prefManager.isAdmin()) {
+            super.attachBaseContext(LocaleHelper.setLocale(newBase, LocaleHelper.LANGUAGE_ENGLISH));
+        } else {
+            super.attachBaseContext(LocaleHelper.onAttach(newBase));
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_complaint_list);
@@ -71,8 +83,6 @@ public class ComplaintListActivity extends AppCompatActivity {
         setupFilters();
 
         if (pref.isAdmin()) {
-            // Admin: always fetch from FastAPI — every Complaint row gets a real
-            // remoteReportId (PostgreSQL UUID) so detail/AI/resolve all work.
             loadAdminRemoteComplaints();
         } else if (pref.isCitizen()) {
             loadRemoteComplaints();
@@ -126,11 +136,6 @@ public class ComplaintListActivity extends AppCompatActivity {
 
     // ── Admin: fetch all reports from FastAPI ──────────────────────────────────
 
-    /**
-     * Fetches every report from the backend (authority view).
-     * Each returned Complaint carries its PostgreSQL UUID as remoteReportId so
-     * AdminComplaintDetailActivity can perform AI fetch, status update, resolve, etc.
-     */
     private void loadAdminRemoteComplaints() {
         if (remoteLoadInProgress || remoteLoadFinished) return;
         remoteLoadInProgress = true;
@@ -143,14 +148,12 @@ public class ComplaintListActivity extends AppCompatActivity {
                 for (RemoteReportResponse r : reports) {
                     try {
                         complaints.add(RemoteReportMapper.toComplaint(r));
-                    } catch (Exception ignored) {
-                        // Skip any individual malformed entry; keep rest.
-                    }
+                    } catch (Exception ignored) {}
                 }
                 runOnUiThread(() -> {
+                    remoteComplaints = complaints;
+                    remoteLoadFinished = true;
                     remoteLoadInProgress = false;
-                    remoteLoadFinished   = true;
-                    remoteComplaints     = complaints;
                     renderComplaints();
                 });
             }
@@ -187,15 +190,15 @@ public class ComplaintListActivity extends AppCompatActivity {
     private void loadRemoteComplaints() {
         if (remoteLoadInProgress || remoteLoadFinished) return;
         remoteLoadInProgress = true;
-        showLoadingMessage("Loading complaints…");
+        showLoadingMessage("Loading reports from server…");
 
         reportRepository.getMyReports(new ReportRepository.ReportListCallback() {
             @Override
-            public void onSuccess(List<Complaint> reports) {
+            public void onSuccess(List<Complaint> complaints) {
                 runOnUiThread(() -> {
+                    remoteComplaints = complaints;
+                    remoteLoadFinished = true;
                     remoteLoadInProgress = false;
-                    remoteLoadFinished   = true;
-                    remoteComplaints     = reports;
                     renderComplaints();
                 });
             }
@@ -206,13 +209,13 @@ public class ComplaintListActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Throwable throwable) {
-                showRemoteFallback("Could not reach the server. Showing saved complaints.");
+            public void onMalformedResponse(Throwable throwable) {
+                showRemoteFallback("Server returned invalid data. Showing saved complaints.");
             }
 
             @Override
-            public void onMalformedResponse(Throwable throwable) {
-                showRemoteFallback("Server returned invalid data. Showing saved complaints.");
+            public void onFailure(Throwable throwable) {
+                showRemoteFallback("Could not reach the server. Showing saved complaints.");
             }
 
             @Override
@@ -231,8 +234,6 @@ public class ComplaintListActivity extends AppCompatActivity {
             renderComplaints();
         });
     }
-
-    // ── Render ────────────────────────────────────────────────────────────────
 
     private void showLoadingMessage(String message) {
         if (tvEmpty != null) {
@@ -268,13 +269,13 @@ public class ComplaintListActivity extends AppCompatActivity {
         }
 
         if (tvCount != null) {
-            tvCount.setText(list.size() + " complaint" + (list.size() != 1 ? "s" : ""));
+            tvCount.setText(getString(R.string.count_complaints, list.size()));
         }
 
         if (list.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             if (tvEmpty != null) {
-                tvEmpty.setText("No complaints found");
+                tvEmpty.setText(R.string.empty_no_complaints);
                 tvEmpty.setVisibility(View.VISIBLE);
             }
         } else {

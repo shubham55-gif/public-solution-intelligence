@@ -1,19 +1,25 @@
 package com.example.smartcivicapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
 import com.example.smartcivicapp.network.models.UserProfileResponse;
 import com.example.smartcivicapp.repositories.AuthRepository;
+import com.example.smartcivicapp.utils.LocaleHelper;
 
 /**
- * CitizenHomeActivity — modern citizen dashboard with live stats cards.
+ * CitizenHomeActivity — citizen dashboard with live stats and Profile/Language management.
  *
  * Source of truth: GET /api/v1/auth/profile
  * Refreshes live statistics (Total, Pending, Resolved) on onResume().
@@ -25,6 +31,11 @@ public class CitizenHomeActivity extends AppCompatActivity {
     private PrefManager pref;
     private AuthRepository authRepository;
     private boolean isStatsLoading = false;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,11 +67,11 @@ public class CitizenHomeActivity extends AppCompatActivity {
     private void setupWelcomeCard() {
         TextView tvWelcomeName = findViewById(R.id.tvWelcomeName);
         if (tvWelcomeName != null) {
-            tvWelcomeName.setText("Welcome back,\n" + pref.getCitizenName());
+            tvWelcomeName.setText(pref.getCitizenName());
         }
         TextView tvWelcomeSub = findViewById(R.id.tvWelcomeSub);
         if (tvWelcomeSub != null) {
-            tvWelcomeSub.setText("Together, we can improve our community.");
+            tvWelcomeSub.setText(R.string.citizen_home_subtitle);
         }
     }
 
@@ -97,7 +108,7 @@ public class CitizenHomeActivity extends AppCompatActivity {
                     if (profile.name != null && !profile.name.trim().isEmpty()) {
                         TextView tvWelcomeName = findViewById(R.id.tvWelcomeName);
                         if (tvWelcomeName != null) {
-                            tvWelcomeName.setText("Hello, " + profile.name + " 👋");
+                            tvWelcomeName.setText(profile.name);
                         }
                     }
                 });
@@ -148,16 +159,92 @@ public class CitizenHomeActivity extends AppCompatActivity {
                     startActivity(new Intent(this, ComplaintListActivity.class)));
         }
 
-        // Logout
-        TextView tvLogout = findViewById(R.id.tvLogout);
-        if (tvLogout != null) {
-            tvLogout.setOnClickListener(v -> {
+        // Profile button (replaces top Logout)
+        View btnProfile = findViewById(R.id.btnProfile);
+        if (btnProfile != null) {
+            btnProfile.setOnClickListener(v -> showProfileDialog());
+        }
+    }
+
+    private void showProfileDialog() {
+        View dialogView = getLayoutInflater().inflate(R.layout.dialog_citizen_profile, null);
+        AlertDialog dialog = new AlertDialog.Builder(this)
+                .setView(dialogView)
+                .create();
+
+        if (dialog.getWindow() != null) {
+            dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+
+        TextView tvName = dialogView.findViewById(R.id.tvProfileName);
+        TextView tvEmail = dialogView.findViewById(R.id.tvProfileEmail);
+        TextView tvPhone = dialogView.findViewById(R.id.tvProfilePhone);
+        RadioButton rbEnglish = dialogView.findViewById(R.id.rbEnglish);
+        RadioButton rbMarathi = dialogView.findViewById(R.id.rbMarathi);
+        RadioButton rbHindi = dialogView.findViewById(R.id.rbHindi);
+        RadioGroup rgLanguage = dialogView.findViewById(R.id.rgLanguage);
+        View btnLogout = dialogView.findViewById(R.id.btnProfileLogout);
+        View btnClose = dialogView.findViewById(R.id.btnProfileClose);
+
+        if (tvName != null) {
+            tvName.setText(pref.getCitizenName());
+        }
+        if (tvEmail != null) {
+            tvEmail.setText(pref.getCitizenEmail());
+        }
+        if (tvPhone != null) {
+            String phone = pref.getUserPhone();
+            if (phone != null && !phone.trim().isEmpty()) {
+                tvPhone.setVisibility(View.VISIBLE);
+                tvPhone.setText(phone);
+            } else {
+                tvPhone.setVisibility(View.GONE);
+            }
+        }
+
+        // Set active language radio button
+        String currentLang = pref.getLanguage();
+        if (LocaleHelper.LANGUAGE_MARATHI.equalsIgnoreCase(currentLang)) {
+            rbMarathi.setChecked(true);
+        } else if (LocaleHelper.LANGUAGE_HINDI.equalsIgnoreCase(currentLang)) {
+            rbHindi.setChecked(true);
+        } else {
+            rbEnglish.setChecked(true);
+        }
+
+        // Language change listener
+        rgLanguage.setOnCheckedChangeListener((group, checkedId) -> {
+            String selectedLang = LocaleHelper.LANGUAGE_ENGLISH;
+            if (checkedId == R.id.rbMarathi) {
+                selectedLang = LocaleHelper.LANGUAGE_MARATHI;
+            } else if (checkedId == R.id.rbHindi) {
+                selectedLang = LocaleHelper.LANGUAGE_HINDI;
+            }
+
+            if (!selectedLang.equalsIgnoreCase(pref.getLanguage())) {
+                pref.setLanguage(selectedLang);
+                LocaleHelper.setLocale(CitizenHomeActivity.this, selectedLang);
+                dialog.dismiss();
+                recreate();
+            }
+        });
+
+        // Logout action
+        if (btnLogout != null) {
+            btnLogout.setOnClickListener(v -> {
+                dialog.dismiss();
                 pref.logout();
-                Intent intent = new Intent(this, RoleSelectionActivity.class);
+                Intent intent = new Intent(CitizenHomeActivity.this, RoleSelectionActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
             });
         }
+
+        if (btnClose != null) {
+            btnClose.setOnClickListener(v -> dialog.dismiss());
+        }
+
+        dialog.show();
     }
 }

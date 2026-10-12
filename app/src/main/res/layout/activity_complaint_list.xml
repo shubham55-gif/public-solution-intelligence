@@ -18,7 +18,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="All Complaints"
+            android:text="@string/title_all_complaints"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#FFFFFF"
@@ -100,7 +100,7 @@
                 android:id="@+id/tvEmpty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="No complaints found"
+                android:text="@string/empty_no_complaints"
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/textPrimary"
@@ -108,7 +108,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Try changing filters or come back later."
+                android:text="@string/empty_no_complaints_desc"
                 android:textSize="14sp"
                 android:textColor="@color/textHint"
                 android:gravity="center"

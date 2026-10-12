@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="google_maps_key" translatable="false">
-        REPLACE_WITH_YOUR_GOOGLE_MAPS_API_KEY
-    </string>
-</resources>

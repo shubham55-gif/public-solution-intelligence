@@ -1,6 +1,7 @@
 package com.example.smartcivicapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -28,6 +29,7 @@ import com.example.smartcivicapp.entities.Complaint;
 import com.example.smartcivicapp.network.models.RemoteReportResponse;
 import com.example.smartcivicapp.network.models.ReportSubmission;
 import com.example.smartcivicapp.repositories.ReportRepository;
+import com.example.smartcivicapp.utils.LocaleHelper;
 import com.example.smartcivicapp.utils.RiskAnalyzer;
 import com.example.smartcivicapp.utils.TimelineHelper;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -85,6 +87,11 @@ public class ReportIssueActivity extends AppCompatActivity {
                     });
 
     @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_report_issue);
@@ -105,7 +112,7 @@ public class ReportIssueActivity extends AppCompatActivity {
                 this, R.array.issue_categories, android.R.layout.simple_spinner_item);
         issueAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerIssue.setAdapter(issueAdapter);
-        spinnerIssue.setPrompt("Select issue type");
+        spinnerIssue.setPrompt(getString(R.string.cat_select));
 
         locationClient = LocationServices.getFusedLocationProviderClient(this);
         fetchLocation();
@@ -113,6 +120,14 @@ public class ReportIssueActivity extends AppCompatActivity {
         btnCapture.setOnClickListener(v -> checkAndOpenCamera());
         btnSubmit.setOnClickListener(v  -> submitComplaint());
     }
+
+    private static final String[] BACKEND_CATEGORIES = {
+        "",
+        "Road Damage",
+        "Garbage Overflow",
+        "Water Leakage",
+        "Street Light Issue"
+    };
 
     private void checkAndOpenCamera() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
@@ -129,12 +144,12 @@ public class ReportIssueActivity extends AppCompatActivity {
             Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             cameraLauncher.launch(i);
         } catch (Exception e) {
-            Toast.makeText(this, "Could not open camera", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.err_camera_open, Toast.LENGTH_SHORT).show();
         }
     }
 
     private void fetchLocation() {
-        tvLocation.setText("Fetching location...");
+        tvLocation.setText(R.string.hint_fetching_location);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this,
@@ -147,7 +162,7 @@ public class ReportIssueActivity extends AppCompatActivity {
                 longitude = loc.getLongitude();
                 tvLocation.setText(String.format("📍 %.5f, %.5f", latitude, longitude));
             } else {
-                tvLocation.setText("Location unavailable");
+                tvLocation.setText(R.string.msg_location_unavailable);
             }
         });
     }
@@ -157,22 +172,23 @@ public class ReportIssueActivity extends AppCompatActivity {
 
         String description = etDescription.getText().toString().trim();
         String ward        = etWard != null ? etWard.getText().toString().trim() : "";
+        int selectedPos    = spinnerIssue.getSelectedItemPosition();
 
-        if (spinnerIssue.getSelectedItemPosition() <= 0) {
-            Toast.makeText(this, "Please select an issue type", Toast.LENGTH_SHORT).show();
+        if (selectedPos <= 0 || selectedPos >= BACKEND_CATEGORIES.length) {
+            Toast.makeText(this, R.string.err_select_issue_type, Toast.LENGTH_SHORT).show();
             spinnerIssue.requestFocus();
             spinnerIssue.performClick();
             return;
         }
 
         if (TextUtils.isEmpty(description)) {
-            etDescription.setError("Please describe the issue");
+            etDescription.setError(getString(R.string.err_enter_description));
             etDescription.requestFocus();
             return;
         }
 
         if (latitude < -90 || latitude > 90 || longitude < -180 || longitude > 180) {
-            Toast.makeText(this, "Invalid location coordinates", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, R.string.err_invalid_location, Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -182,7 +198,7 @@ public class ReportIssueActivity extends AppCompatActivity {
         }
 
         long now = System.currentTimeMillis();
-        String issueCategory = spinnerIssue.getSelectedItem().toString();
+        String issueCategory = BACKEND_CATEGORIES[selectedPos];
 
         // Preserve the existing Room write during this first migration phase.
         Complaint c = new Complaint();
@@ -238,23 +254,22 @@ public class ReportIssueActivity extends AppCompatActivity {
                     }).start();
                     complaint.remoteReportId = remoteId;
                 }
-                String displayId = remoteId != null ? remoteId : "unknown";
-                completeSubmission("Submitted to backend. Report ID: " + displayId);
+                completeSubmission(getString(R.string.msg_report_success));
             }
 
             @Override
             public void onHttpError(int statusCode) {
-                completeSubmission("Saved locally. Backend returned HTTP " + statusCode + ".");
+                completeSubmission(getString(R.string.msg_report_saved_locally));
             }
 
             @Override
             public void onConnectionFailure(Throwable throwable) {
-                completeSubmission("Saved locally. Could not reach the backend.");
+                completeSubmission(getString(R.string.msg_report_saved_locally));
             }
 
             @Override
             public void onConfigurationError(String message) {
-                completeSubmission("Saved locally. " + message + ".");
+                completeSubmission(getString(R.string.msg_report_saved_locally));
             }
         });
     }
@@ -269,7 +284,7 @@ public class ReportIssueActivity extends AppCompatActivity {
         isSubmitting = inProgress;
         btnSubmit.setEnabled(!inProgress);
         btnCapture.setEnabled(!inProgress);
-        btnSubmit.setText(inProgress ? "Submitting..." : submitButtonText);
+        btnSubmit.setText(inProgress ? getString(R.string.msg_submitting) : submitButtonText);
     }
 
     private void completeSubmission(String message) {

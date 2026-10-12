@@ -1,5 +1,6 @@
 package com.example.smartcivicapp;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,7 @@ import com.example.smartcivicapp.network.RetrofitClient;
 import com.example.smartcivicapp.network.models.RemoteReportResponse;
 import com.example.smartcivicapp.utils.DateUtils;
 import com.example.smartcivicapp.utils.ImageUtils;
+import com.example.smartcivicapp.utils.LocaleHelper;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +38,11 @@ public class CitizenComplaintDetailActivity extends AppCompatActivity {
 
     private int localId;
     private Complaint localComplaint;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,10 +90,12 @@ public class CitizenComplaintDetailActivity extends AppCompatActivity {
         tvDescription.setText(localComplaint.description != null ? localComplaint.description : "");
         
         String status = localComplaint.status;
-        tvStatus.setText(status != null ? status : "Pending");
-        
         if ("Resolved".equalsIgnoreCase(status)) {
-            tvStatus.setText("RESOLVED ✓");
+            tvStatus.setText(R.string.msg_resolved_badge);
+        } else if ("In Progress".equalsIgnoreCase(status)) {
+            tvStatus.setText(R.string.status_in_progress);
+        } else {
+            tvStatus.setText(R.string.status_pending);
         }
 
         ImageUtils.loadEvidenceImage(localComplaint.beforeImagePath, ivBefore, null);
@@ -138,7 +147,7 @@ public class CitizenComplaintDetailActivity extends AppCompatActivity {
         }
 
         if ("resolved".equalsIgnoreCase(remote.status)) {
-            tvStatus.setText("RESOLVED ✓");
+            tvStatus.setText(R.string.msg_resolved_badge);
             llResolutionInfo.setVisibility(View.VISIBLE);
 
             if (remote.resolution_note != null && !remote.resolution_note.isEmpty()) {
@@ -165,7 +174,11 @@ public class CitizenComplaintDetailActivity extends AppCompatActivity {
         } else {
             llResolutionInfo.setVisibility(View.GONE);
             String st = remote.status != null ? remote.status : "Pending";
-            tvStatus.setText("in_progress".equalsIgnoreCase(st) ? "IN PROGRESS" : st.toUpperCase());
+            if ("in_progress".equalsIgnoreCase(st)) {
+                tvStatus.setText(R.string.status_in_progress);
+            } else {
+                tvStatus.setText(R.string.status_pending);
+            }
         }
     }
 }

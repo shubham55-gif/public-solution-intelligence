@@ -127,9 +127,14 @@ npm run build
 
 1. Open the project root in **Android Studio** (Ladybug / Iguana or newer).
 2. Sync Gradle files (`.\gradlew.bat :app:assembleDebug`).
-3. For local emulator testing:
+3. To render Google Maps, add a restricted Android Maps SDK key to the ignored
+   root `local.properties` file as `MAPS_API_KEY=your_maps_key`. The key may
+   also be supplied through the `MAPS_API_KEY` environment variable. Do not add
+   a real key to tracked files. Without a key, the app remains buildable and
+   displays a setup message, but Google map tiles cannot load.
+4. For local emulator testing:
    - Default backend URL: `http://10.0.2.2:8000/`
-4. For physical device testing over LAN:
+5. For physical device testing over LAN:
    - Configure `-PBACKEND_BASE_URL=http://<YOUR_LAN_IP>:8000/` in Gradle properties (see `ANDROID_BACKEND_SETUP.md`).
 
 ---

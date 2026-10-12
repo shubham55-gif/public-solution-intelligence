@@ -19,11 +19,11 @@
             android:gravity="center"
             android:padding="20dp">
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="📢  Report a Civic Issue"
+                android:text="@string/report_issue_title"
                 android:textSize="20sp" android:textStyle="bold"
                 android:textColor="#FFFFFF" android:gravity="center" />
             <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Help improve your community"
+                android:text="@string/report_issue_subtitle"
                 android:textSize="13sp" android:textColor="#B2DFDB"
                 android:gravity="center" android:layout_marginTop="6dp" />
         </LinearLayout>
@@ -46,7 +46,7 @@
 
                 <!-- Issue Type -->
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Issue Type *" android:textSize="13sp" android:textStyle="bold"
+                    android:text="@string/label_issue_type" android:textSize="13sp" android:textStyle="bold"
                     android:textColor="@color/textPrimary" android:layout_marginBottom="6dp" />
 
                 <Spinner
@@ -61,14 +61,14 @@
 
                 <!-- Description -->
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Description *" android:textSize="13sp" android:textStyle="bold"
+                    android:text="@string/label_description" android:textSize="13sp" android:textStyle="bold"
                     android:textColor="@color/textPrimary" android:layout_marginBottom="6dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Describe the issue in detail…"
+                    android:hint="@string/hint_description"
                     android:layout_marginBottom="16dp"
                     app:boxCornerRadiusTopStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
@@ -88,7 +88,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Area / Ward Name"
+                    android:hint="@string/hint_area_ward"
                     android:layout_marginBottom="16dp"
                     app:boxCornerRadiusTopStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
@@ -105,7 +105,7 @@
 
                 <!-- Image section -->
                 <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                    android:text="Issue Photo" android:textSize="13sp" android:textStyle="bold"
+                    android:text="@string/label_issue_photo" android:textSize="13sp" android:textStyle="bold"
                     android:textColor="@color/textPrimary" android:layout_marginBottom="8dp" />
 
                 <ImageView
@@ -120,7 +120,7 @@
                     android:id="@+id/tvNoImageHint"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="📷  Tap button below to capture photo"
+                    android:text="@string/hint_capture_photo"
                     android:textSize="13sp"
                     android:textColor="@color/textHint"
                     android:gravity="center"
@@ -131,7 +131,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="46dp"
-                    android:text="Capture Image"
+                    android:text="@string/btn_capture_image"
                     android:textSize="14sp"
                     app:strokeColor="@color/citizenPrimary"
                     android:textColor="@color/citizenPrimary"
@@ -156,7 +156,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Fetching GPS location…"
+                        android:text="@string/hint_fetching_location"
                         android:textSize="13sp"
                         android:textColor="@color/citizenPrimary" />
                 </LinearLayout>
@@ -166,7 +166,7 @@
                     android:id="@+id/btnSubmit"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:text="SUBMIT COMPLAINT"
+                    android:text="@string/btn_submit_complaint"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.05"

@@ -21,62 +21,82 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
                 android:layout_alignParentStart="true"
-                android:layout_centerVertical="true"
-                android:layout_toStartOf="@id/tvLogout"
-                android:layout_marginEnd="12dp">
+                android:layout_marginStart="15dp"
+                android:layout_marginEnd="21dp"
+                android:layout_toStartOf="@+id/btnProfile"
+                android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Welcome back,"
-                    android:textSize="14sp"
-                    android:textColor="#B2DFDB" />
+                    android:text="@string/citizen_home_welcome_back"
+                    android:textColor="#B2DFDB"
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvWelcomeName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Citizen"
-                    android:textSize="22sp"
-                    android:textStyle="bold"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/citizen_home_default_name"
                     android:textColor="#FFFFFF"
-                    android:layout_marginTop="2dp" />
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tvLogout"
+            <!-- Profile Entry Point (Replaces Logout) -->
+            <LinearLayout
+                android:id="@+id/btnProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Logout"
-                android:textSize="13sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:background="@drawable/bg_logout_btn"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
+                android:paddingLeft="14dp"
+                android:paddingRight="14dp"
                 android:paddingTop="8dp"
                 android:paddingBottom="8dp"
                 android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:clickable="true"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_profile_user"
+                    app:tint="#FFFFFF"
+                    android:layout_marginEnd="6dp" />
+
+                <TextView
+                    android:id="@+id/tvProfileLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/btn_profile"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvWelcomeSub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Report civic issues in your area"
-                android:textSize="14sp"
+                android:layout_below="@+id/btnProfile"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="24dp"
+                android:text="@string/citizen_home_subtitle"
                 android:textColor="#80CBC4"
-                android:layout_below="@id/tvLogout"
-                android:layout_marginTop="16dp" />
+                android:textSize="14sp" />
         </RelativeLayout>
 
         <!-- ═══ STATS SECTION ═══ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="My Statistics"
+            android:text="@string/section_my_statistics"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/textPrimary"
@@ -117,7 +137,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Total"
+                        android:text="@string/stat_total"
                         android:textSize="12sp"
                         android:textColor="#BBDEFB" />
                 </LinearLayout>
@@ -148,7 +168,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Pending"
+                        android:text="@string/stat_pending"
                         android:textSize="12sp"
                         android:textColor="#FFE0B2" />
                 </LinearLayout>
@@ -179,7 +199,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Resolved"
+                        android:text="@string/stat_resolved"
                         android:textSize="11sp"
                         android:textColor="#C8E6C9" />
                 </LinearLayout>
@@ -190,7 +210,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Quick Access"
+            android:text="@string/section_quick_access"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@color/textPrimary"
@@ -226,7 +246,7 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="📋" android:textSize="32sp" android:layout_marginBottom="8dp" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="My Complaints" android:textSize="13sp" android:textStyle="bold"
+                        android:text="@string/card_my_complaints" android:textSize="13sp" android:textStyle="bold"
                         android:textColor="@color/textPrimary" android:gravity="center" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -252,7 +272,7 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="🗺" android:textSize="32sp" android:layout_marginBottom="8dp" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="View Map" android:textSize="13sp" android:textStyle="bold"
+                        android:text="@string/card_view_map" android:textSize="13sp" android:textStyle="bold"
                         android:textColor="@color/textPrimary" android:gravity="center" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -278,7 +298,7 @@
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                         android:text="🔔" android:textSize="32sp" android:layout_marginBottom="8dp" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text="Updates" android:textSize="13sp" android:textStyle="bold"
+                        android:text="@string/card_updates" android:textSize="13sp" android:textStyle="bold"
                         android:textColor="@color/textPrimary" android:gravity="center" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -303,7 +323,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="How It Works"
+                    android:text="@string/section_how_it_works"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:textColor="@color/citizenPrimary"
@@ -317,7 +337,7 @@
                         android:background="@drawable/bg_step_circle_green" />
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="16dp"
-                        android:text="Tap '+' to report a civic issue with photo + GPS" android:textSize="13sp"
+                        android:text="@string/step_1_text" android:textSize="13sp"
                         android:textColor="@color/textSecondary" />
                 </LinearLayout>
 
@@ -329,7 +349,7 @@
                         android:background="@drawable/bg_step_circle_green" />
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="16dp"
-                        android:text="Admin reviews and updates the complaint status" android:textSize="13sp"
+                        android:text="@string/step_2_text" android:textSize="13sp"
                         android:textColor="@color/textSecondary" />
                 </LinearLayout>
 
@@ -341,7 +361,7 @@
                         android:background="@drawable/bg_step_circle_green" />
                     <TextView android:layout_width="0dp" android:layout_height="wrap_content"
                         android:layout_weight="1" android:layout_marginStart="16dp"
-                        android:text="You get notified when your issue is resolved" android:textSize="13sp"
+                        android:text="@string/step_3_text" android:textSize="13sp"
                         android:textColor="@color/textSecondary" />
                 </LinearLayout>
             </LinearLayout>
@@ -362,7 +382,7 @@
                 android:id="@+id/btnReportIssue"
                 android:layout_width="match_parent"
                 android:layout_height="68dp"
-                android:text="+ REPORT NEW ISSUE"
+                android:text="@string/btn_report_new_issue"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:letterSpacing="0.05"
@@ -380,4 +400,3 @@
 
     </LinearLayout>
 </ScrollView>
-

@@ -7,6 +7,15 @@ if (!backendBaseUrl.endsWith("/")) {
     backendBaseUrl += "/"
 }
 def backendDevelopmentUserId = project.findProperty("BACKEND_DEVELOPMENT_USER_ID") ?: ""
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withInputStream { localProperties.load(it) }
+}
+def mapsApiKey = (localProperties.getProperty("MAPS_API_KEY")
+        ?: System.getenv("MAPS_API_KEY")
+        ?: "").trim()
+def mapsApiKeyConfigured = mapsApiKey ==~ /AIza[A-Za-z0-9_-]{35}/
 
 android {
     namespace 'com.example.smartcivicapp'
@@ -25,6 +34,8 @@ android {
 
         buildConfigField "String", "BACKEND_BASE_URL", "\"${backendBaseUrl}\""
         buildConfigField "String", "BACKEND_DEVELOPMENT_USER_ID", "\"${backendDevelopmentUserId}\""
+        buildConfigField "boolean", "GOOGLE_MAPS_API_KEY_CONFIGURED", "${mapsApiKeyConfigured}"
+        manifestPlaceholders = [googleMapsApiKey: mapsApiKey]
     }
 
     buildTypes {

@@ -41,16 +41,16 @@
         android:gravity="center_vertical">
 
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🔴 Pending" android:textSize="11sp" android:textColor="@color/textSecondary"
+            android:text="@string/legend_pending" android:textSize="11sp" android:textColor="@color/textSecondary"
             android:layout_marginEnd="10dp" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🟡 In Progress" android:textSize="11sp" android:textColor="@color/textSecondary"
+            android:text="@string/legend_in_progress" android:textSize="11sp" android:textColor="@color/textSecondary"
             android:layout_marginEnd="10dp" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🟢 Resolved" android:textSize="11sp" android:textColor="@color/textSecondary"
+            android:text="@string/legend_resolved" android:textSize="11sp" android:textColor="@color/textSecondary"
             android:layout_marginEnd="10dp" />
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:text="🟠 High Risk" android:textSize="11sp" android:textColor="@color/textSecondary" />
+            android:text="@string/legend_high_risk" android:textSize="11sp" android:textColor="@color/textSecondary" />
     </LinearLayout>
 
     <!-- Full screen map -->

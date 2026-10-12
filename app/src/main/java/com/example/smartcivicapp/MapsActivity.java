@@ -47,6 +47,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private boolean remoteLoadInProgress;
     private boolean remoteLoadFinished;
     private boolean remoteLoadFailed;
+    private boolean initialCameraPositioned;
+
+    @Override
+    protected void attachBaseContext(android.content.Context newBase) {
+        PrefManager prefManager = new PrefManager(newBase);
+        if (prefManager.isAdmin()) {
+            super.attachBaseContext(com.example.smartcivicapp.utils.LocaleHelper.setLocale(newBase, com.example.smartcivicapp.utils.LocaleHelper.LANGUAGE_ENGLISH));
+        } else {
+            super.attachBaseContext(com.example.smartcivicapp.utils.LocaleHelper.onAttach(newBase));
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +113,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap = googleMap;
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setMapToolbarEnabled(true);
+        if (!BuildConfig.GOOGLE_MAPS_API_KEY_CONFIGURED) {
+            android.widget.Toast.makeText(this,
+                    "Google Maps API key is not configured. Add MAPS_API_KEY to local.properties.",
+                    android.widget.Toast.LENGTH_LONG).show();
+        }
 
         // Single-complaint mode
         double lat   = getIntent().getDoubleExtra("LAT", -999);
@@ -117,8 +133,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                         .icon(BitmapDescriptorFactory.defaultMarker(
                                 BitmapDescriptorFactory.HUE_AZURE)));
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(pos, 16f));
+                initialCameraPositioned = true;
             } else {
                 mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDIA, 4f));
+                initialCameraPositioned = true;
             }
         } else if (pref.isCitizen()) {
             loadRemoteComplaints();
@@ -141,7 +159,10 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         if (all == null || all.isEmpty()) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDIA, 4f));
+            if (!initialCameraPositioned) {
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDIA, 4f));
+                initialCameraPositioned = true;
+            }
             return;
         }
 
@@ -181,10 +202,12 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             if (firstValid == null) firstValid = new LatLng(c.latitude, c.longitude);
         }
 
-        if (firstValid != null) {
+        if (firstValid != null && !initialCameraPositioned) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(firstValid, 13f));
-        } else {
+            initialCameraPositioned = true;
+        } else if (firstValid == null && !initialCameraPositioned) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(DEFAULT_INDIA, 4f));
+            initialCameraPositioned = true;
         }
     }
 

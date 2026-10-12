@@ -1,6 +1,86 @@
 <resources>
+    <!-- App & General -->
     <string name="app_name">SmartCivicApp</string>
-    <string name="title_activity_maps">Map View</string>
+    <string name="btn_profile">Profile</string>
+    <string name="profile_title">Citizen Profile</string>
+    <string name="select_language">Select Language</string>
+    <string name="lang_english">English</string>
+    <string name="lang_marathi">मराठी (Marathi)</string>
+    <string name="lang_hindi">हिंदी (Hindi)</string>
+    <string name="btn_logout">Logout</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_close">Close</string>
+    <string name="btn_back">Back</string>
+    <string name="or_divider">or</string>
+    <string name="phone_label">Phone</string>
+    <string name="email_label">Email</string>
+
+    <!-- Citizen Login & Register -->
+    <string name="citizen_login_title">Citizen Login</string>
+    <string name="citizen_login_subtitle">Welcome back! Please sign in.</string>
+    <string name="hint_email">Email Address</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_full_name">Full Name</string>
+    <string name="hint_phone">Phone Number</string>
+    <string name="hint_password_min">Password (min 6 characters)</string>
+    <string name="btn_login">LOGIN</string>
+    <string name="btn_create_account">CREATE ACCOUNT</string>
+    <string name="btn_register">REGISTER</string>
+    <string name="login_already_have_account">Already have an account? Login here</string>
+    <string name="err_email_required">Email is required</string>
+    <string name="err_email_invalid">Please enter a valid email address</string>
+    <string name="err_password_required">Password is required</string>
+    <string name="err_name_required">Name is required</string>
+    <string name="err_password_min">Password must be at least 6 characters</string>
+    <string name="msg_logging_in">Logging in…</string>
+    <string name="msg_registering">Registering…</string>
+    <string name="msg_welcome">Welcome %1$s!</string>
+
+    <!-- Citizen Home -->
+    <string name="citizen_home_welcome_back">Welcome back,</string>
+    <string name="citizen_home_default_name">Citizen</string>
+    <string name="citizen_home_subtitle">Report civic issues in your area</string>
+    <string name="citizen_home_greeting">Hello, %1$s 👋</string>
+    <string name="section_my_statistics">My Statistics</string>
+    <string name="stat_total">Total</string>
+    <string name="stat_pending">Pending</string>
+    <string name="stat_resolved">Resolved</string>
+    <string name="section_quick_access">Quick Access</string>
+    <string name="card_my_complaints">My Complaints</string>
+    <string name="card_view_map">View Map</string>
+    <string name="card_updates">Updates</string>
+    <string name="section_how_it_works">How It Works</string>
+    <string name="step_1_text">Tap \'+\' to report a civic issue with photo + GPS</string>
+    <string name="step_2_text">Admin reviews and updates the complaint status</string>
+    <string name="step_3_text">You get notified when your issue is resolved</string>
+    <string name="btn_report_new_issue">+ REPORT NEW ISSUE</string>
+
+    <!-- Report Issue -->
+    <string name="report_issue_title">📢  Report a Civic Issue</string>
+    <string name="report_issue_subtitle">Help improve your community</string>
+    <string name="label_issue_type">Issue Type *</string>
+    <string name="label_description">Description *</string>
+    <string name="hint_description">Describe the issue in detail…</string>
+    <string name="label_area_ward">Area / Ward Name</string>
+    <string name="hint_area_ward">Area / Ward Name</string>
+    <string name="label_issue_photo">Issue Photo</string>
+    <string name="hint_capture_photo">📷  Tap button below to capture photo</string>
+    <string name="btn_capture_image">Capture Image</string>
+    <string name="hint_fetching_location">📍  Fetching GPS location…</string>
+    <string name="msg_location_unavailable">📍 Location unavailable</string>
+    <string name="btn_submit_complaint">SUBMIT COMPLAINT</string>
+    <string name="msg_submitting">Submitting complaint…</string>
+    <string name="msg_report_success">Complaint submitted successfully!</string>
+    <string name="msg_report_saved_locally">Complaint saved locally.</string>
+    <string name="err_select_issue_type">Please select an issue type</string>
+    <string name="err_enter_description">Please enter a description</string>
+    <string name="err_enter_ward">Please enter ward/area name</string>
+    <string name="err_camera_open">Could not open camera</string>
+    <string name="err_invalid_location">Invalid location coordinates</string>
+    <string name="cat_select">Select issue type</string>
+
+    <!-- Issue Categories -->
     <string-array name="issue_categories">
         <item>Select issue type</item>
         <item>Road Damage</item>
@@ -8,4 +88,29 @@
         <item>Water Leakage</item>
         <item>Street Light Issue</item>
     </string-array>
+
+    <!-- Complaint List & Status Badges -->
+    <string name="title_all_complaints">All Complaints</string>
+    <string name="status_pending">Pending</string>
+    <string name="status_in_progress">In Progress</string>
+    <string name="status_resolved">Resolved</string>
+    <string name="count_complaints">%1$d complaints</string>
+    <string name="empty_no_complaints">No complaints found</string>
+    <string name="empty_no_complaints_desc">Try changing filters or come back later.</string>
+    <string name="time_just_now">just now</string>
+
+    <!-- Citizen Complaint Detail -->
+    <string name="label_original_evidence">Original Evidence</string>
+    <string name="label_resolution">Resolution</string>
+    <string name="label_after_resolution_evidence">After-Resolution Evidence</string>
+    <string name="msg_after_evidence_unavailable">After-resolution evidence not available</string>
+    <string name="msg_resolved_badge">RESOLVED ✓</string>
+    <string name="label_resolved_at">Resolved: %1$s</string>
+
+    <!-- Maps -->
+    <string name="title_activity_maps">Map View</string>
+    <string name="legend_pending">🔴 Pending</string>
+    <string name="legend_in_progress">🟡 In Progress</string>
+    <string name="legend_resolved">🟢 Resolved</string>
+    <string name="legend_high_risk">🟠 High Risk</string>
 </resources>

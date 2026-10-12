@@ -22,11 +22,30 @@ public class PrefManager {
     private static final String KEY_USER_ID           = "USER_ID";
     private static final String KEY_AUTH_TOKEN        = "AUTH_TOKEN";
     private static final String KEY_USER_PHONE        = "USER_PHONE";
+    private static final String KEY_LANGUAGE          = "APP_LANGUAGE";
 
     private final SharedPreferences pref;
 
     public PrefManager(Context context) {
-        pref = context.getApplicationContext().getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        Context appContext = (context != null && context.getApplicationContext() != null)
+                ? context.getApplicationContext() : context;
+        if (appContext != null) {
+            pref = appContext.getSharedPreferences(PREF_NAME, Context.MODE_PRIVATE);
+        } else {
+            pref = null;
+        }
+    }
+
+    public String getLanguage() {
+        if (pref == null) return "en";
+        return pref.getString(KEY_LANGUAGE, "en");
+    }
+
+    public void setLanguage(String languageCode) {
+        if (pref == null) return;
+        pref.edit()
+            .putString(KEY_LANGUAGE, languageCode != null ? languageCode : "en")
+            .commit();
     }
 
     public void saveSession(TokenResponse tokenResponse) {
@@ -109,6 +128,8 @@ public class PrefManager {
 
     public void logout() {
         Log.d(TAG, "Logging out user: " + getUserId());
+        String currentLang = getLanguage();
         pref.edit().clear().commit();
+        setLanguage(currentLang);
     }
 }

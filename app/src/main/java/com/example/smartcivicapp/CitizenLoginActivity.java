@@ -1,5 +1,6 @@
 package com.example.smartcivicapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -15,6 +16,7 @@ import com.example.smartcivicapp.database.DatabaseHelper;
 import com.example.smartcivicapp.network.RetrofitClient;
 import com.example.smartcivicapp.network.models.TokenResponse;
 import com.example.smartcivicapp.repositories.AuthRepository;
+import com.example.smartcivicapp.utils.LocaleHelper;
 
 public class CitizenLoginActivity extends AppCompatActivity {
 
@@ -25,6 +27,11 @@ public class CitizenLoginActivity extends AppCompatActivity {
     private DatabaseHelper db;
     private PrefManager pref;
     private AuthRepository authRepo;
+
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(LocaleHelper.onAttach(newBase));
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,20 +58,20 @@ public class CitizenLoginActivity extends AppCompatActivity {
         String password = etPassword.getText().toString().trim();
 
         if (TextUtils.isEmpty(email)) {
-            etEmail.setError("Email is required");
+            etEmail.setError(getString(R.string.err_email_required));
             return;
         }
         if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            etEmail.setError("Please enter a valid email address");
+            etEmail.setError(getString(R.string.err_email_invalid));
             return;
         }
         if (TextUtils.isEmpty(password)) {
-            etPassword.setError("Password is required");
+            etPassword.setError(getString(R.string.err_password_required));
             return;
         }
 
         btnLogin.setEnabled(false);
-        btnLogin.setText("Logging in...");
+        btnLogin.setText(R.string.msg_logging_in);
 
         Log.d(TAG, "Attempting citizen login for: " + email);
 
@@ -72,19 +79,19 @@ public class CitizenLoginActivity extends AppCompatActivity {
             @Override
             public void onSuccess(TokenResponse response) {
                 btnLogin.setEnabled(true);
-                btnLogin.setText("LOGIN");
+                btnLogin.setText(R.string.btn_login);
 
                 Log.d(TAG, String.format("Citizen login SUCCESS -> User: %s | Role: %s | HasToken: %b | IsLoggedIn: %b",
                         response.userId, response.role, !pref.getAuthToken().isEmpty(), pref.isCitizenLoggedIn()));
 
-                Toast.makeText(CitizenLoginActivity.this, "Welcome " + response.name + "!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(CitizenLoginActivity.this, getString(R.string.msg_welcome, response.name), Toast.LENGTH_SHORT).show();
                 navigateToHome();
             }
 
             @Override
             public void onError(String message, int statusCode) {
                 btnLogin.setEnabled(true);
-                btnLogin.setText("LOGIN");
+                btnLogin.setText(R.string.btn_login);
                 Log.e(TAG, String.format("Citizen login ERROR -> HTTP %d: %s", statusCode, message));
                 Toast.makeText(CitizenLoginActivity.this, message, Toast.LENGTH_LONG).show();
             }
@@ -92,7 +99,7 @@ public class CitizenLoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Throwable throwable) {
                 btnLogin.setEnabled(true);
-                btnLogin.setText("LOGIN");
+                btnLogin.setText(R.string.btn_login);
                 Log.e(TAG, "Citizen login NETWORK FAILURE -> " + throwable.getMessage(), throwable);
                 Toast.makeText(CitizenLoginActivity.this, "Cannot reach backend: " + throwable.getMessage(), Toast.LENGTH_LONG).show();
             }

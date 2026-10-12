@@ -45,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Original Evidence"
+            android:text="@string/label_original_evidence"
             android:textStyle="bold"
             android:textColor="@color/textPrimary"
             android:layout_marginBottom="8dp"/>
@@ -68,7 +68,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Resolution"
+                android:text="@string/label_resolution"
                 android:textStyle="bold"
                 android:textColor="@color/textPrimary"
                 android:layout_marginBottom="8dp"/>
@@ -84,7 +84,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="After-Resolution Evidence"
+                android:text="@string/label_after_resolution_evidence"
                 android:textStyle="bold"
                 android:textColor="@color/textPrimary"
                 android:layout_marginBottom="8dp"/>
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
                 android:textColor="@color/textHint"
-                android:text="After-resolution evidence not available"
+                android:text="@string/msg_after_evidence_unavailable"
                 android:visibility="gone"
                 android:layout_marginBottom="16dp"/>
 
@@ -118,4 +118,3 @@
 
     </LinearLayout>
 </ScrollView>
-

@@ -22,6 +22,11 @@ public class SplashActivity extends AppCompatActivity {
     private static final int SPLASH_DELAY_MS = 2200;
 
     @Override
+    protected void attachBaseContext(android.content.Context newBase) {
+        super.attachBaseContext(com.example.smartcivicapp.utils.LocaleHelper.onAttach(newBase));
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         com.example.smartcivicapp.network.RetrofitClient.init(this);

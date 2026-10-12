@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App & General -->
+    <string name="app_name">SmartCivicApp</string>
+    <string name="btn_profile">प्रोफाइल</string>
+    <string name="profile_title">नागरिक प्रोफाइल</string>
+    <string name="select_language">भाषा निवडा</string>
+    <string name="lang_english">English</string>
+    <string name="lang_marathi">मराठी (Marathi)</string>
+    <string name="lang_hindi">हिंदी (Hindi)</string>
+    <string name="btn_logout">लॉगआउट</string>
+    <string name="btn_cancel">रद्द करा</string>
+    <string name="btn_submit">सबमिट करा</string>
+    <string name="btn_close">बंद करा</string>
+    <string name="btn_back">मागे</string>
+    <string name="or_divider">किंवा</string>
+    <string name="phone_label">फोन</string>
+    <string name="email_label">ईमेल</string>
+
+    <!-- Citizen Login & Register -->
+    <string name="citizen_login_title">नागरिक लॉगिन</string>
+    <string name="citizen_login_subtitle">परत स्वागत आहे! कृपया साइन इन करा.</string>
+    <string name="hint_email">ईमेल पत्ता</string>
+    <string name="hint_password">पासवर्ड</string>
+    <string name="hint_full_name">पूर्ण नाव</string>
+    <string name="hint_phone">मोबाईल नंबर</string>
+    <string name="hint_password_min">पासवर्ड (किमान ६ अक्षरे)</string>
+    <string name="btn_login">लॉगिन</string>
+    <string name="btn_create_account">खाते तयार करा</string>
+    <string name="btn_register">नोंदणी करा</string>
+    <string name="login_already_have_account">आधीच खाते आहे का? येथे लॉगिन करा</string>
+    <string name="err_email_required">ईमेल आवश्यक आहे</string>
+    <string name="err_email_invalid">कृपया वैध ईमेल पत्ता प्रविष्ट करा</string>
+    <string name="err_password_required">पासवर्ड आवश्यक आहे</string>
+    <string name="err_name_required">नाव आवश्यक आहे</string>
+    <string name="err_password_min">पासवर्ड किमान ६ अक्षरांचा असावा</string>
+    <string name="msg_logging_in">लॉगिन करत आहे…</string>
+    <string name="msg_registering">नोंदणी करत आहे…</string>
+    <string name="msg_welcome">स्वागत आहे %1$s!</string>
+
+    <!-- Citizen Home -->
+    <string name="citizen_home_welcome_back">स्वागत आहे,</string>
+    <string name="citizen_home_default_name">नागरिक</string>
+    <string name="citizen_home_subtitle">आपल्या भागातील नागरी समस्यांची तक्रार नोंदवा</string>
+    <string name="citizen_home_greeting">नमस्कार, %1$s 👋</string>
+    <string name="section_my_statistics">माझी आकडेवारी</string>
+    <string name="stat_total">एकूण</string>
+    <string name="stat_pending">प्रलंबित</string>
+    <string name="stat_resolved">निवारण झाले</string>
+    <string name="section_quick_access">जलद पर्याय</string>
+    <string name="card_my_complaints">माझ्या तक्रारी</string>
+    <string name="card_view_map">नकाशा पहा</string>
+    <string name="card_updates">सूचना</string>
+    <string name="section_how_it_works">हे कसे कार्य करते</string>
+    <string name="step_1_text">फोटो आणि GPS सह नागरी समस्येची तक्रार करण्यासाठी \'+\' टॅप करा</string>
+    <string name="step_2_text">प्रशासन तक्रारीचे पुनरावलोकन करून स्थिती अपडेट करते</string>
+    <string name="step_3_text">समस्येचे निवारण झाल्यावर तुम्हाला सूचना मिळेल</string>
+    <string name="btn_report_new_issue">+ नवीन तक्रार नोंदवा</string>
+
+    <!-- Report Issue -->
+    <string name="report_issue_title">📢  नागरी समस्येची तक्रार नोंदवा</string>
+    <string name="report_issue_subtitle">आपला परिसर सुधारण्यास मदत करा</string>
+    <string name="label_issue_type">समस्येचा प्रकार *</string>
+    <string name="label_description">वर्णन *</string>
+    <string name="hint_description">समस्येचे सविस्तर वर्णन करा…</string>
+    <string name="label_area_ward">परिसर / प्रभाग नाव</string>
+    <string name="hint_area_ward">परिसर / प्रभाग नाव</string>
+    <string name="label_issue_photo">समस्येचा फोटो</string>
+    <string name="hint_capture_photo">📷  फोटो काढण्यासाठी खालील बटण दाबा</string>
+    <string name="btn_capture_image">फोटो काढा</string>
+    <string name="hint_fetching_location">📍  GPS स्थान मिळवत आहे…</string>
+    <string name="msg_location_unavailable">📍 स्थान उपलब्ध नाही</string>
+    <string name="btn_submit_complaint">तक्रार सबमिट करा</string>
+    <string name="msg_submitting">तक्रार सबमिट करत आहे…</string>
+    <string name="msg_report_success">तक्रार यशस्वीरित्या नोंदवली गेली!</string>
+    <string name="msg_report_saved_locally">तक्रार स्थानिक पातळीवर सेव्ह केली.</string>
+    <string name="err_select_issue_type">कृपया समस्येचा प्रकार निवडा</string>
+    <string name="err_enter_description">कृपया वर्णन प्रविष्ट करा</string>
+    <string name="err_enter_ward">कृपया प्रभाग/परिसराचे नाव प्रविष्ट करा</string>
+    <string name="err_camera_open">कॅमेरा उघडता आला नाही</string>
+    <string name="err_invalid_location">अवैध स्थान निर्देशक</string>
+    <string name="cat_select">समस्येचा प्रकार निवडा</string>
+
+    <!-- Issue Categories -->
+    <string-array name="issue_categories">
+        <item>समस्येचा प्रकार निवडा</item>
+        <item>रस्त्याचे नुकसान</item>
+        <item>कचरा साचणे</item>
+        <item>पाणी गळती</item>
+        <item>स्ट्रीट लाईट समस्या</item>
+    </string-array>
+
+    <!-- Complaint List & Status Badges -->
+    <string name="title_all_complaints">सर्व तक्रारी</string>
+    <string name="status_pending">प्रलंबित</string>
+    <string name="status_in_progress">प्रगतीपथावर</string>
+    <string name="status_resolved">निवारण झाले</string>
+    <string name="count_complaints">%1$d तक्रारी</string>
+    <string name="empty_no_complaints">कोणतीही तक्रार आढळली नाही</string>
+    <string name="empty_no_complaints_desc">फिल्टर बदलून पहा किंवा नंतर तपासा.</string>
+    <string name="time_just_now">आत्ताच</string>
+
+    <!-- Citizen Complaint Detail -->
+    <string name="label_original_evidence">मूळ पुरावा</string>
+    <string name="label_resolution">निवारण माहिती</string>
+    <string name="label_after_resolution_evidence">निवारणानंतरचा पुरावा</string>
+    <string name="msg_after_evidence_unavailable">निवारणानंतरचा पुरावा उपलब्ध नाही</string>
+    <string name="msg_resolved_badge">निवारण झाले ✓</string>
+    <string name="label_resolved_at">निवारण दिनांक: %1$s</string>
+
+    <!-- Maps -->
+    <string name="title_activity_maps">नकाशा दृश्य</string>
+    <string name="legend_pending">🔴 प्रलंबित</string>
+    <string name="legend_in_progress">🟡 प्रगतीपथावर</string>
+    <string name="legend_resolved">🟢 निवारण झाले</string>
+    <string name="legend_high_risk">🟠 उच्च जोखीम</string>
+</resources>

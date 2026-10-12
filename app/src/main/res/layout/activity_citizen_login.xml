@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Citizen Login"
+                android:text="@string/citizen_login_title"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:textColor="#FFFFFF" />
@@ -38,7 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome back! Please sign in."
+                android:text="@string/citizen_login_subtitle"
                 android:textSize="13sp"
                 android:textColor="#B2DFDB"
                 android:layout_marginTop="4dp" />
@@ -66,7 +66,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email Address"
+                    android:hint="@string/hint_email"
                     android:layout_marginBottom="16dp"
                     app:boxCornerRadiusTopStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
@@ -90,7 +90,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Password"
+                    android:hint="@string/hint_password"
                     android:layout_marginBottom="24dp"
                     app:boxCornerRadiusTopStart="10dp"
                     app:boxCornerRadiusTopEnd="10dp"
@@ -114,7 +114,7 @@
                     android:id="@+id/btnLogin"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:text="LOGIN"
+                    android:text="@string/btn_login"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     android:letterSpacing="0.08"
@@ -132,7 +132,7 @@
                     <View android:layout_width="0dp" android:layout_height="1dp"
                         android:layout_weight="1" android:background="@color/divider" />
                     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                        android:text=" or " android:textColor="@color/textHint"
+                        android:text="@string/or_divider" android:textColor="@color/textHint"
                         android:textSize="13sp" android:paddingLeft="8dp" android:paddingRight="8dp" />
                     <View android:layout_width="0dp" android:layout_height="1dp"
                         android:layout_weight="1" android:background="@color/divider" />
@@ -144,7 +144,7 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:text="CREATE ACCOUNT"
+                    android:text="@string/btn_create_account"
                     android:textSize="14sp"
                     app:strokeColor="@color/citizenPrimary"
                     app:strokeWidth="1.5dp"
